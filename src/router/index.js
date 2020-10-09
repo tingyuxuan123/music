@@ -1,23 +1,47 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
 
 Vue.use(VueRouter)
 
+const SongListDetails=()=>import('components/main/SongListDetails')
+const searchpage=()=>import("views/home/child/searchpage")
+const mvpage=()=>import("views/home/child/mvpage")
+const userpage=()=>import("views/home/child/userpage")
+const albumpage=()=>import("views/home/child/albumpage")
+const songerpage=()=>import("views/home/child/songerpage")
+
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+{
+  path:"/playlist/:id",
+  name:"SongListDetails",
+  component: SongListDetails
+},
+{
+  path:"/search/:keywords",
+  name:"searchpage",
+  component:searchpage
+},
+{
+  path:"/mvinfo/:type/:id",
+  name:"mvpage",
+  component:mvpage
+},
+{
+  path:"/user/:id",
+  name:"userpage",
+  component:userpage
+},
+{
+  path:"/albumpage/:id",
+  name:"albumpage",
+  component:albumpage
+},
+{
+  path:"/songerpage/:id",
+  name:"songerpage",
+  component:songerpage
+}
 ]
 
 const router = new VueRouter({

@@ -1,32 +1,96 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+<div id="app">
+    <home />
+</div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import home from '@/views/home/home.vue'
+import cookie from '../../cloud_music-master/src/utils/cookie';
+export default {
+    components: {
+        home
+    },
+    beforeCreate() {
+
+        //console.log(cookie.value)
+        if (cookie.value != "") {
+            this.$api.login_status().then((result) => {
+                this.$store.commit("updated_login_status", {
+                    isLogin: true,
+                    profile: result['profile']
+                })
+            }).catch((err) => {
+                console.log(err)
+            });
+        }
+
+    },
+    created() {
+        this.$bus.$on("login_staus", () => {
+            this.getuserinfo()
+
+        })
+        this.getuserinfo()
+    },
+    methods: {
+        getuserinfo() {
+            console.log(this.$store.state.profile)
+            let uid = this.$store.state.profile.UID
+
+            this.$api.playlist(uid).then((result) => {
+                console.log(result.playlist)
+                let other_playlist = result.playlist.filter((item, index) => {
+                    return item['subscribed']
+                })
+
+                let own_playlist = result.playlist.filter((item, index) => {
+                    return !item['subscribed']
+                })
+
+                this.$store.commit("updated_user_info", {
+                    other_playlist,
+                    own_playlist
+                })
+
+                // console.log(other_playlist, own_playlist)
+
+            }).catch((err) => {
+
+            });
+
+            this.$api.likelist(uid).then((result) => {
+                this.$store.commit("updated_liked_song", result.ids)
+            }).catch((err) => {
+
+            });
+
+        }
+    },
+
+}
+</script>
+
+<style lang="less">
+@import "assets/css/base.css";
+
+body,
+html {
+    background-color: #eceff1;
 }
 
-#nav {
-  padding: 30px;
+.el-tabs .el-tabs__nav-scroll {
+    display: flex;
+    justify-content: center;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+::-webkit-scrollbar {
+    width: 3px;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+::-webkit-scrollbar-thumb {
+    width: 3px;
+    border-radius: 2px;
+    background-color: #e0e0e0;
 }
 </style>
