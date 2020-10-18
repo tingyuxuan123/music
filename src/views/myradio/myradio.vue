@@ -1,16 +1,12 @@
 <template>
-<div class='foot'>
-    <play-util></play-util>
+<div class='myradio'>
+
 </div>
 </template>
 
 <script>
-import PlayUtil from 'views/play/playUtil'
 export default {
-    name: "foot",
-    components: {
-        PlayUtil
-    },
+    components: {},
     data() {
         return {
 

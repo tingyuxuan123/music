@@ -48,6 +48,7 @@ export default {
                     return !item['subscribed']
                 })
 
+                this.$api.login_refresh();
                 this.$store.commit("updated_user_info", {
                     other_playlist,
                     own_playlist

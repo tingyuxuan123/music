@@ -1,20 +1,14 @@
 <template>
-<div class='songlist'>
-    <el-row class="titles" type="flex">
-        <el-col class="index" :span="2">序号</el-col>
-        <el-col :span="8">音乐标题</el-col>
-        <el-col :span="5">歌手</el-col>
-        <el-col :span="7">专辑</el-col>
-        <el-col :span="2">时长</el-col>
-    </el-row>
+<div class='listpage'>
+
     <el-row type="flex" v-for="(item,index) in partsonglist" :key="item.id" @click.native="songClick(item.id,(index+(currentpage-1)*40))">
-        <el-col class="index" :span="2">{{index+1+(currentpage-1)*40}}</el-col>
-        <el-col :span="8">{{item.name}}</el-col>
+        <el-col class="index" :span="1">{{index+1+(currentpage-1)*40}}</el-col>
+        <el-col class="haveimg" :span="9"><img :src="item.album.blurPicUrl" alt=""> {{item.name}}</el-col>
         <el-col :span="5">{{item.ar ? item.ar[0].name : item.artists[0].name }}</el-col>
-        <el-col :span="7">{{item.al ? item.al.name : item.album.name}}</el-col>
-        <el-col :span="2">{{item.dt ? item.dt : item.duration | timeLongFormat('00:00')}}</el-col>
+        <el-col :span="8">{{item.al ? item.al.name : item.album.name}}</el-col>
+        <el-col :span="1">{{item.dt ? item.dt : item.duration | timeLongFormat('00:00')}}</el-col>
     </el-row>
-    <el-pagination layout="prev, pager, next" :page-count.sync="pagecount" :total="songlist.songCount ? songlist.songCount:songlist.length" :current-page.sync="currentpage" v-if="songlist.songCount ? true:songlist.length>40" @current-change="currentchange" :page-size="40">
+    <el-pagination layout="prev, pager, next" :page-count.sync="pagecount" :total="songlist.songCount ? songlist.songCount:songlist.length" :current-page="currentpage" v-if="songlist.songCount ? true:songlist.length>40" @current-change="currentchange" :page-size="40">
     </el-pagination>
 </div>
 </template>
@@ -34,12 +28,12 @@ export default {
     watch: {
         songlist() {
 
-            console.log(this.songlist)
+            // console.log(this.songlist)
             if (this.songlist instanceof Array) {
 
                 this.currentchange(this.currentpage)
             } else {
-                console.log(this.songlist.songCount)
+                // console.log(this.songlist.songCount)
                 this.partsonglist = this.songlist.songs
 
             }
@@ -48,7 +42,7 @@ export default {
     },
     methods: {
         currentchange(page) {
-            console.log(page)
+            // console.log(page)
             this.currentpage = page
             if (this.songlist instanceof Array) {
                 this.partsonglist = this.songlist.filter((value, index) => {
@@ -60,13 +54,13 @@ export default {
 
         },
         songClick(id, index) {
-            console.log(index)
+            // console.log(index)
             this.$bus.$emit('song-click', id)
             this.$store.commit("updated_currentlist", {
                 trackIds: this.trackIds,
                 index
             })
-            console.log(this.$store.state.currentlist)
+            // console.log(this.$store.state.currentlist)
         }
     },
     props: {
@@ -97,7 +91,7 @@ export default {
     background-color: #e0e0e0 !important;
 }
 
-.songlist {
+.listpage {
     font-size: 12px;
 }
 
@@ -107,10 +101,20 @@ export default {
 
 .el-row {
     text-overflow: ellipsis;
-    line-height: 3.5em;
-    height: 3.5em;
+    line-height: 4.5em;
+    height: 4.5em;
     overflow: hidden;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.haveimg {
+
+    img {
+        width: 35px;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
 }
 
 .el-row:nth-of-type(odd) {

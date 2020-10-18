@@ -1,6 +1,6 @@
 <template>
 <div class='blur' :style="{width:width,height:height}">
-    <div class="wrapper" v-if="enable">
+    <div class="wrapper" v-if="(enable && !isIE)">
         <img :src="img" alt="" class="bg">
     </div>
     <div class="content">
@@ -35,7 +35,11 @@ export default {
             default: true
         }
     },
-    computed: {},
+    computed: {
+          isIE() {
+        return (!!window.ActiveXObject || "ActiveXObject" in window)
+      },
+    },
     watch: {},
     methods: {
 
@@ -53,6 +57,7 @@ export default {
 //@import url(); 引入公共css类
 .blur {
     position: relative;
+
 }
 
 .wrapper {
@@ -62,7 +67,14 @@ export default {
     overflow: hidden;
     padding: 15px 0;
     background-color: white;
+    -webkit-filter: blur(100px); 
+    -moz-filter: blur(100px);
+    -ms-filter: blur(100px); 
+    -o-filter: blur(100px);
     filter: blur(100px);
+
+    // filter: url(blur.svg#blur); /* IE10 */  
+     filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='100');/* IE6~IE9 */
 }
 
 .bg {
@@ -71,8 +83,8 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     display: inline-block;
-    width: 80%;
-    height: 70%;
+    width: 70%;
+    height: 60%;
 }
 
 .content {

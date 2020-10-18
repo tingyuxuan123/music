@@ -5,7 +5,7 @@
             <span>为你找到{{count}}条内容</span>
         </div>
         <el-tab-pane label="单曲" name="1" :lazy="true">
-            <song-list :songlist="result" @currentchange="currentchange"></song-list>
+            <song-list :songlist="result" :trackIds="trackIds" @currentchange="currentchange"></song-list>
         </el-tab-pane>
         <el-tab-pane label="歌手" name="100" :lazy="true">
             <search-songer-list :data="artists" :count="artistCount" @currentchange="currentchange"></search-songer-list>
@@ -60,7 +60,8 @@ export default {
             playlistCount: 0,
             playlists: [],
             userprofileCount: 0,
-            userprofiles: []
+            userprofiles: [],
+            trackIds: []
         };
     },
     computed: {},
@@ -81,6 +82,7 @@ export default {
                     case "1":
                         this.count = result.result.songCount
                         this.result = result.result
+                        this.trackIds = result.result.songs
                         break;
                     case "100":
                         this.count = this.artistCount = result.result.artistCount

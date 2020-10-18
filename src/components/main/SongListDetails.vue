@@ -39,7 +39,7 @@
             <el-tab-pane label="歌曲列表" name="song-tracks" :lazy="true">
 
                 <!--          歌曲列表-->
-                <song-list :songlist="tracks"></song-list>
+                <song-list :songlist="tracks" :trackIds="trackIds"></song-list>
             </el-tab-pane>
             <el-tab-pane label="评论" name="comments" :lazy="true">
 
@@ -90,6 +90,7 @@ export default {
             block: false,
             selected: "song-tracks",
             tracks: [],
+            trackIds: []
 
         };
     },
@@ -119,8 +120,8 @@ export default {
                 this.userId = this.song_list_detail.playlist.userId
 
                 this.tracks = this.song_list_detail.playlist.tracks
-
-                //  console.log(result)
+                this.trackIds = this.song_list_detail.playlist.trackIds
+                console.log(this.trackIds)
             }).catch((err) => {
 
             });

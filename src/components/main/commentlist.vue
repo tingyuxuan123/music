@@ -30,7 +30,7 @@
 
         </li>
     </ul>
-    <el-pagination layout="prev, pager, next" :current-page="currentpage" :total="total" v-if="total>40" @current-change="currentchange" :page-size="40">
+    <el-pagination layout="prev, pager, next" :current-page.sync="currentpage" :total="total" v-if="total>40" @current-change="currentchange" :page-size="40">
     </el-pagination>
 </div>
 </template>
@@ -74,7 +74,7 @@ export default {
                 case "playlist": //歌单评论
                     this.$api.comment_playlist(id, offest * 40, limit).then((result) => {
                         console.log(result)
-                        this.currentpage = offest
+                        this.currentpage = offest + 1
                         this.comments = result.comments
                         this.topComments = result.topComments
                         this.total = result.total
@@ -107,13 +107,26 @@ export default {
                         this.total = result.total
                     })
                     break;
+                case "song": //mv评论
+                    if (id) {
+                        this.$api.comment_music(id, offest * 40, limit).then((result) => {
+                            console.log(result)
+                            this.currentpage = offest
+                            this.comments = result.comments
+                            this.topComments = result.topComments
+                            this.total = result.total
+                        })
+
+                    }
+
+                    break;
 
             }
 
         },
 
         currentchange(page) {
-            this.currentpage = page
+            //    this.currentpage = page
             this.getcomment(this.id, page - 1, this.limit)
         }
 

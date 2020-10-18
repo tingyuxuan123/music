@@ -1,26 +1,21 @@
 <template>
-<div class='side'>
-    <el-menu :default-openeds="['1', '2']" router mode="vertical">
-        <el-submenu index="1">
-            <template slot="title"><i class="el-icon-message"></i>推荐</template>
-            <el-menu-item index="/1-1">发现音乐</el-menu-item>
-            <el-menu-item index="/1-2">视频</el-menu-item>
-            <el-menu-item index="/1-3">朋友</el-menu-item>
-            <el-menu-item index="/1-4">私人FM</el-menu-item>
-        </el-submenu>
-        <el-submenu index="2">
-            <template slot="title"><i class="el-icon-menu"></i>我的音乐</template>
-            <el-menu-item index="/2-1">每日推荐</el-menu-item>
-            <el-menu-item index="/2-2">我的音乐云盘</el-menu-item>
-            <el-menu-item index="/2-3">我的电台</el-menu-item>
-            <el-menu-item index="/2-4">我的收藏</el-menu-item>
-        </el-submenu>
+<div class='side' :class="{long:islong}">
+    <el-menu :default-openeds="['1', '2']" router mode="vertical" background-color="#f5f5f7" text-color="#7d7d7d" active-text-color="#000">
+        <template slot="title"><i class="el-icon-setting"></i>推荐</template>
+        <el-menu-item index="/find">发现音乐</el-menu-item>
+        <el-menu-item index="/video">视频</el-menu-item>
+        <el-menu-item index="/personalfm" :disabled="!$store.state.isLogin">私人FM</el-menu-item>
+        <template slot="title"><i class="el-icon-setting"></i>我的音乐</template>
+        <el-menu-item index="/recommend">每日推荐</el-menu-item>
+        <el-menu-item index="/myradio">我的电台</el-menu-item>
+        <el-menu-item index="/mycollect" :disabled="!$store.state.isLogin">我的收藏</el-menu-item>
+
         <el-submenu index="3" :disabled="!$store.state.isLogin">
-            <template slot="title"><i class="el-icon-setting"></i>创建的歌单</template>
+            <template slot="title">创建的歌单</template>
             <el-menu-item :index="`/playlist/${item.id}`" v-for="(item) in $store.state.profile.own_playlist" :key="item.id">{{item.name}}</el-menu-item>
         </el-submenu>
         <el-submenu index="4" :disabled="!$store.state.isLogin">
-            <template slot="title"><i class="el-icon-setting"></i>收藏的歌单</template>
+            <template slot="title">收藏的歌单</template>
             <el-menu-item :index="`/playlist/${item.id}`" v-for="(item) in $store.state.profile.other_playlist" :key="item.id">{{item.name}}</el-menu-item>
 
         </el-submenu>
@@ -33,9 +28,13 @@
 <script>
 export default {
     name: "side",
-    components: {},
+    components: {
+
+    },
     data() {
-        return {};
+        return {
+            islong: true
+        };
     },
     computed: {},
     watch: {},
@@ -48,19 +47,43 @@ export default {
     mounted() {
 
         console.log(this.$store.state.profile)
-
+        this.$bus.$on('showchange', () => {
+            this.islong = false
+        })
     },
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 //@import url(); 引入公共css类
+.long {
+    height: 100% !important;
+}
+
 .side {
     width: 100%;
     box-sizing: border-box;
     height: calc(100% - 52px);
-
+    background-color: #f5f5f7;
     overflow: auto;
+
+    .el-menu-item {
+        border-left: 3px solid #f5f5f7;
+        padding-left: 20px !important;
+    }
+
+    .el-menu-item:hover {
+        border-left: 3px solid #c4c4c6;
+    }
+
+    .el-menu-item.is-active {
+        color: #fff;
+        box-sizing: border-box;
+        background-color: #E6E7Ea !important;
+        border-left: 3px solid #409EFF;
+
+    }
+
 }
 
 .el-menu {

@@ -5,6 +5,8 @@ import {
   userinfo,
   song_list_detail,
   song_detail,
+  lyric,
+  song_url,
   comment_playlist,
   playlist_subscribers,
   searchresult,
@@ -19,6 +21,22 @@ import {
   artist_mv,
   album_detail,
   comment_album,
+  comment_music,
+  banner,
+  personalized,
+  playlist_category,
+  top_playlist,
+  toplist,
+  artist_cate_list,
+  top_song,
+  top_album,
+  video_group_list,
+  video_category_list,
+  group,
+  videoall,
+  mvs
+
+
 } from "./request_show"
 import {
   login,
@@ -27,6 +45,7 @@ import {
   login_refresh,
   album_sublist,
   mv_sublist,
+  artist_sublist,
   user_detail,
   playlist,
   likelist,
@@ -75,14 +94,32 @@ const api={
     login_status,
     login_refresh,
     comment_album,
-  
+    song_url,
+    comment_music,
+    banner,
+    personalized,
+    playlist_category,
+    top_playlist,
+    toplist,
+    artist_cate_list,
+    top_song,
+    top_album,
+    video_group_list,
+    video_category_list,
+    group,
+    videoall,
+    mvs,
+
     album_sublist,
     mv_sublist,
+    artist_sublist,
     user_detail,
     playlist,
     likelist,
     song_list_detail,
-    song_detail
+    song_detail,
+    lyric
+
     
 }
 

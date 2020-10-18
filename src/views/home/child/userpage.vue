@@ -27,30 +27,28 @@
         <div class="playlist">
             <div class="playlist-item" v-for="item in other_playlist" :key="item.id" @click="$router.push(`/playlist/${item.id}`)">
                 <div class="img">
-                     <img :src="item.coverImgUrl" alt="">
-                     <span>{{item.playCount | logogram}}</span>
-                    
+                    <img :src="item.coverImgUrl" alt="">
+                    <span>{{item.playCount | logogram}}</span>
+
                 </div>
-               
 
                 <span class="playlist_name">{{item.name}}</span>
             </div>
-              <div class="util" v-for="item in other_count" :key="item">{{item}}</div>
+            <div class="util" v-for="item in other_count" :key="item">{{item}}</div>
 
         </div>
 
     </div>
     <div class=" collect-playlist">
         <h3>收藏的歌单</h3>
-     
 
-           <div class="playlist">
+        <div class="playlist">
             <div class="playlist-item" v-for="item in own_playlist" :key="item.id" @click="$router.push(`/playlist/${item.id}`)">
-                   <div class="img">
-                     <img :src="item.coverImgUrl" alt="">
-                     <span class="playcount">{{item.playCount | logogram}}</span>
+                <div class="img">
+                    <img :src="item.coverImgUrl" alt="">
+                    <span class="playcount">{{item.playCount | logogram}}</span>
                 </div>
-                   <span class="playlist_name">{{item.name}}</span>
+                <span class="playlist_name">{{item.name}}</span>
             </div>
             <div class="util" v-for="item in own_count" :key="item">{{item}}</div>
         </div>
@@ -67,9 +65,9 @@ export default {
             id: "",
             userinfo: {},
             other_playlist: [],
-            other_count:0,
+            other_count: 0,
             own_playlist: [],
-            own_count:0
+            own_count: 0
         };
     },
     computed: {
@@ -99,11 +97,11 @@ export default {
                 this.other_playlist = result.playlist.filter((item, index) => {
                     return item['userId'] == this.id
                 })
-                this.other_count= 5 -this.other_playlist.length%5
+                this.other_count = 5 - this.other_playlist.length % 5
                 this.own_playlist = result.playlist.filter((item, index) => {
                     return item['userId'] != this.id
                 })
-                this.own_count=5 - this.own_playlist.length%5               
+                this.own_count = 5 - this.own_playlist.length % 5
                 console.log(this.other_playlist)
                 console.log(this.own_playlist)
             }).catch((err) => {
@@ -145,6 +143,7 @@ export default {
                 width: 20px;
                 vertical-align: middle;
                 margin-left: 10px;
+
             }
 
             .level {
@@ -211,26 +210,25 @@ h3 {
         margin-bottom: 20px;
         transition: all 0.4s;
         cursor: pointer;
-      //  border: 1px solid rgba(0, 0, 0, 0.2);
+        //  border: 1px solid rgba(0, 0, 0, 0.2);
         border-radius: 5px;
-        
 
-.img{
-    position: relative;
+        .img {
+            position: relative;
 
-    span{
-        position: absolute;
-        background-color:rgba(0, 0, 0, 0.4);
-        top: 0px;
-        right: 2px;
-        font-size: 12px;
-        color: #ffffff;
+            span {
+                position: absolute;
+                background-color: rgba(0, 0, 0, 0.4);
+                top: 0px;
+                right: 2px;
+                font-size: 12px;
+                color: #ffffff;
 
-    }
-}
+            }
+        }
 
         &:hover {
-            transform: translate(0px ,-5px);
+            transform: translate(0px, -5px);
         }
 
         span {
@@ -242,12 +240,13 @@ h3 {
 
     img {
         width: 100%;
-
+        border-radius: 5px;
     }
 }
 
-.util{
+.util {
     width: 150px;
     opacity: 0;
+    margin: 0px 10px;
 }
 </style>

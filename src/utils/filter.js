@@ -70,7 +70,9 @@ const Filter = {
     });
 
     Vue.filter('logogram', function (value) {
-      if (value >= 10000) {
+      if(value >= 100000000){
+        return value = (value / 100000000).toFixed(1) + '亿'
+      }else if (value >= 10000) {
         return value = (value / 10000).toFixed(1) + '万'
       }
       return value

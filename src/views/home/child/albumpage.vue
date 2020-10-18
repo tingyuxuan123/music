@@ -19,7 +19,7 @@
     <el-tabs class="tabs" v-model="selected">
 
         <el-tab-pane label="歌曲列表" name="1" :lazy="true">
-            <song-list :songlist="songs"></song-list>
+            <song-list :songlist="songs" :trackIds="songs"></song-list>
         </el-tab-pane>
         <el-tab-pane label="评论" name="2" :lazy="true">
             <comment-list type="album" :id="id"></comment-list>

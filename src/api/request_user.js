@@ -31,7 +31,7 @@ function login_logout(){
 }
 
 
-//获取已收藏的歌曲列表
+//获取已收藏的歌曲手表
  function artist_sublist() {
     return instance( { url: '/artist/sublist' } )
   }
@@ -45,6 +45,8 @@ function login_logout(){
   export  function mv_sublist() {
     return instance( { url: '/mv/sublist' } )
   }
+
+
   
   //获取用户详情
   export  function user_detail( uid ) {

@@ -15,7 +15,7 @@
     <el-tabs class="tabs" v-model="selected">
 
         <el-tab-pane label="热门歌曲" name="1" :lazy="true">
-            <song-list :songlist="hotSongs"></song-list>
+            <song-list :songlist="hotSongs" :trackIds="hotSongs"></song-list>
         </el-tab-pane>
         <el-tab-pane label="专辑" name="2" :lazy="true">
             <album :id="id"></album>
@@ -50,7 +50,8 @@ export default {
             selected: "1",
             id: "",
             artist: "",
-            hotSongs: []
+            hotSongs: [],
+
         };
     },
     computed: {},
@@ -74,7 +75,7 @@ export default {
     mounted() {
         this.id = this.$route.params.id;
         console.log(this.id)
-         this.get_artist_info(this.id)
+        this.get_artist_info(this.id)
     },
 }
 </script>

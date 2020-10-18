@@ -1,12 +1,13 @@
 <template>
-<div class='album'>
-    <div v-for="item in hotAlbums" :key="item.id" class="album-item" @click="$router.push(`/albumpage/${item.id}`)">
+<div class='newalbum'>
+    <div v-for="item in newalbums" :key="item.id" class="album-item" @click="$router.push(`/albumpage/${item.id}`)">
         <div class="cover">
             <img class="image1" src="~/assets/img/al_cover_mask.png" alt="">
             <img class="image2" :src="item.blurPicUrl" alt="">
         </div>
 
         <span>{{item.name}}</span>
+        <span style="color:#666666">{{item.artists[0].name}}</span>
         <span style="color:#666666">{{item.publishTime | dateTimeFormat('yyyy-MM-dd') }}</span>
     </div>
     <div class="util" v-for="item in hotAlbumCount" :key="item">{{item}}</div>
@@ -18,40 +19,29 @@ export default {
     components: {},
     data() {
         return {
-            hotAlbums: [],
             hotAlbumCount: ""
         };
     },
     computed: {},
     watch: {
-        id(val) {
-            this.get_artist_album(val);
-            console.log(val)
-        }
+
     },
     props: {
-        id: {
-            type: String,
-            required: true
+        newalbums: {
+            type: Array,
+            required: true,
+            default: () => {
+                return []
+            }
         }
     },
     methods: {
-        get_artist_album(id) {
-            this.$api.artist_album(id).then((result) => {
-                this.hotAlbums = result.hotAlbums
-                this.hotAlbumCount = 5 - this.hotAlbums.length % 5
-                console.log(result.hotAlbums)
-            }).catch((err) => {
 
-            });
-        },
     },
     created() {
 
     },
     mounted() {
-        console.log(this.id)
-        this.get_artist_album(this.id)
 
     },
 }
@@ -59,7 +49,7 @@ export default {
 
 <style lang="less" scoped>
 //@import url(); 引入公共css类
-.album {
+.newalbum {
     width: 100%;
     display: flex;
     flex-wrap: wrap;

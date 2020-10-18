@@ -6,9 +6,10 @@
             <app-head></app-head>
         </el-header>
         <el-container class="main-container">
-
-            <el-aside class="aside" width="240px">
+            <song-detail class="songdetail"></song-detail>
+            <el-aside class="aside" width="200px">
                 <app-side></app-side>
+                <song-intro></song-intro>
             </el-aside>
             <el-main class="light-scroll">
 
@@ -29,12 +30,16 @@ import AppHead from 'views/home/child/head'
 import AppSide from 'views/home/child/side'
 import AppFoot from 'views/home/child/foot'
 import login from 'views/home/child/login'
+import SongIntro from 'views/play/songIntro'
+import SongDetail from 'views/play/songDetail'
 export default {
     components: {
         AppHead,
         AppSide,
         AppFoot,
-        login
+        login,
+        SongIntro,
+        SongDetail
     },
     data() {
         return {
@@ -60,7 +65,7 @@ export default {
     resize: both;
     height: 600px;
     width: 1200px;
-    min-width: 600px;
+    min-width: 1000px;
     min-height: 300px;
     overflow: hidden;
 
@@ -74,9 +79,9 @@ export default {
 
 .window .el-aside {
     resize: horizontal;
-    min-width: 230px;
+    min-width: 200px;
     border-right: 1px solid #e0e0e0;
-    ;
+
 }
 
 .window .__container {
@@ -89,7 +94,7 @@ export default {
 }
 
 .window .el-header {
-    background-color: #eceff1;
+    background-color: #409EFF;
 }
 
 .window .el-footer {

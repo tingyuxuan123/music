@@ -13,6 +13,10 @@ export default new Vuex.Store({
       other_playlist: [],  //收藏的歌曲列表
       own_playlist: [], //自己建的歌单列表
       liked_song: [],
+    },
+    currentlist:{
+      trackIds:[],
+      index:0
     }
   },
   mutations: {
@@ -36,7 +40,15 @@ export default new Vuex.Store({
     },
     updated_liked_song(state,liked_song){
       state.liked_song=liked_song
+    },
+    updated_currentlist(state,{trackIds,index}){
+      state.currentlist.trackIds=trackIds;
+      state.currentlist.index=index;
+    },
+    updated_currentlist_index(state,index){
+      state.currentlist.index=index;
     }
+    
   },
   actions: {
   },

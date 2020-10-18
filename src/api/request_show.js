@@ -46,6 +46,15 @@ export function personalized( limit ) {
   export function top_playlist(cat, offset, limit, order = 'hot') {
     return instance({ url: '/top/playlist', params: { cat, offset, limit, order } })
   }
+
+  export function banner(){
+    return instance({
+      url:"/banner",
+      params:{
+        type:0
+      }
+    })
+  }
   
   
   //获取专辑详情
@@ -58,7 +67,16 @@ export function personalized( limit ) {
   export function song_detail( ids ) {
     return instance( { url: '/song/detail', params: { ids } } )
   }
-  
+   //传入音乐 id, 可获得歌曲连接
+  export function song_url(id){
+    return instance({
+      url:"/song/url",
+      params:{
+        id
+      }
+    })
+  }
+
   //传入音乐 id 获取歌词
   export function lyric( id ) {
     return instance( { url: '/lyric', params: { id } } )
@@ -176,10 +194,78 @@ export function personalized( limit ) {
       }
     })
   }
-  
 
+//调用此接口 , 可获取视频标签列表
+  export function video_group_list(){
+    return instance({
+      url:"/video/group/list",
+    })
+  }
+
+ // 说明 : 调用此接口 , 可获取视频分类列表
+  export function video_category_list(){
+    return instance({
+      url:"/video/category/list"
+    })
+
+  }
   
+  //调用此接口 , 传入标签/分类id,可获取到相关的视频,分页参数只能传入offset
+
+  export function group(id,offset=0){
+    return instance({
+      url:"/video/group",
+      params:{
+        id,//videoGroup 的 id
+        offset
+      }
+    })
+  }
+//说明 : 调用此接口,可获取视频分类列表,分页参数只能传入offset
+  export function videoall(offset=0){
+    return instance({
+      url:"/video/timeline/all",
+      params:{
+        offset
+      }
+    })
+  }
+
+  //每日推荐歌曲  需要登录
+  export function recommend_songs(){
+    return instance({
+      url:"recommend/songs"
+    })
+  }
+
+
+  //每日推荐歌单 需要登录
+  export function recommend_resource(){
+    return instance({
+      url:"/recommend/resource"
+    })
+  }
+
+  //说明 : 私人 FM( 需要登录 )
+
+  export function personal_fm(){
+    return instance({
+      url:"/personal_fm"
+    })
+  }
   
+  //说明 : 调用此接口 , 传入音乐 id, 可喜欢该音乐
+
+  export function addlike(id){
+    return instance({
+      url:"/like",
+      params:{
+        id
+      }
+    })
+  }
+
+ 
   
   
 export{
