@@ -56,6 +56,9 @@ export default {
 
 <style lang="less" scoped>
 //@import url(); 引入公共css类
+.find{
+    padding: 20px;
+}
 .tabs {
     height: 100%;
 }

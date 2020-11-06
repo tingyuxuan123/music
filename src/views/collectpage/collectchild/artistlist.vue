@@ -1,6 +1,6 @@
 <template>
 <div class='artistlist'>
-    <el-row type="flex" v-for="(item) in artistlist" :key="item.id" @click.native="$router.push(`/albumpage/${item.id}`)">
+    <el-row type="flex" v-for="(item) in artistlist" :key="item.id" @click.native="$router.push(`/songerpage/${item.id}`)">
 
         <el-col class="haveimg" :span="12"><img :src="item.img1v1Url" alt=""> {{item.name}}</el-col>
         <el-col class="artist" :span="10">专辑:{{item.albumSize}}</el-col>

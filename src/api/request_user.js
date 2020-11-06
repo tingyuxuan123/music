@@ -65,8 +65,20 @@ function login_logout(){
     return instance( { url: '/likelist', params: { uid } } )
   }
   
+  //说明 : 私人 FM( 需要登录 )
 
+  export function personal_fm(){
+    return instance({
+      url:"/personal_fm"
+    })
+  }
 
+  // 获取我关注的电台 需要登录
+export function dj_sublist(){
+  return instance({
+    url:"/dj/sublist"
+  })
+}
 
 
 export{

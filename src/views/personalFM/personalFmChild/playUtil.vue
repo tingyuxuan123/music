@@ -2,7 +2,6 @@
 <div class='playUtil'>
     <audio autoplay :src="url" ref="audio" @canplay="getDuration" @timeupdate="updateTime" @ended="playend"></audio>
     <div class="util">
-
         <div class="left">
             <span class="prev" @click="iscanclick(prev) "><img src="~/assets/img/icon-prev.svg" alt=""></span>
             <span class="control" @click="iscanclick(playclick)">
@@ -13,7 +12,6 @@
                 <img src="~/assets/img/icon-next.svg" alt="">
             </span>
         </div>
-
         <div class="center">
             <span class="time">{{ currentTime  | timelongformat}}</span>
             <el-slider class="slider" v-model="currentTime" :show-tooltip="false" :max="duration" @change="changetime"></el-slider>
@@ -99,7 +97,7 @@ export default {
             console.log(this.$refs.audio.volume)
         },
         updateTime(e) {
-            this.$bus.$emit("timechange", this.currentTime)
+            this.$bus.$emit("fmtimechange", this.currentTime)
             if (this.vaild) {
                 this.vaild = false
                 setTimeout(() => {
@@ -147,24 +145,33 @@ export default {
 
             }
         },
-        order_way() {
-            let index = this.$store.state.currentlist.index;
-            console.log(index)
-            let lenght = this.$store.state.currentlist.trackIds.length - 1
+        order_way() { //顺序播放  下一首 
+            let index = this.$store.state.fm.currentindex;
+
+            let lenght = this.$store.state.fm.currentlist.length - 1
 
             if (index == lenght) {
-                this.$store.commit("updated_currentlist_index", 0);
-                let id = this.$store.state.currentlist.trackIds[0].id;
-
-                this.$bus.$emit("song-click", id);
+                this.$store.commit("updated_fm_info", {
+                    currentindex: 0,
+                    currentsongid: this.$store.state.fm.currentlist[0].id,
+                    currenttime: 0
+                });
+                let id = this.$store.state.fm.currentlist[0].id;
+                this.$bus.$emit("sxfm", true, this.$store.state.fm.currentlist[0].id)
+                this.$bus.$emit("fm-click", id);
             } else {
-                index = this.$store.state.currentlist.index + 1
+                index = this.$store.state.fm.currentindex + 1
 
-                this.$store.commit("updated_currentlist_index", index);
-                let id = this.$store.state.currentlist.trackIds[index].id;
-
-                this.$bus.$emit("song-click", id);
+                this.$store.commit("updated_fm_info", {
+                    currentindex: index,
+                    currentsongid: this.$store.state.fm.currentlist[index].id,
+                    currenttime: 0
+                });
+                let id = this.$store.state.fm.currentlist[index].id;
+                this.$bus.$emit("sxfm", false, this.$store.state.fm.currentlist[index].id)
+                this.$bus.$emit("fm-click", id);
             }
+
         },
         random_way() {
             let index = this.$store.state.currentlist.index;
@@ -236,14 +243,14 @@ export default {
         }
         this.playway = parseInt(localStorage.getItem("playway"))
 
-        this.$bus.$on("song-click", (id) => {
+        this.$bus.$on("fm-click", (id) => { //监听fm 点击
             console.log(id)
-            this.$store.commit("changepalytype", true);
             this.get_song_url(id)
         })
 
-        this.$bus.$on("fm-click", (id) => { //监听fm 点击 但fm 播放的时候 普通歌曲停止播放
-            this.isplay = false
+        this.$bus.$on("song-click", (id) => { //监听 歌曲点击  
+            this.isplay = false //关闭当前音乐
+
         })
 
     },

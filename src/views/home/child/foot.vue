@@ -1,15 +1,18 @@
 <template>
 <div class='foot'>
-    <play-util></play-util>
+    <play-util v-show="$store.state.PlayType"></play-util>
+    <Fm-play-util v-show="!$store.state.PlayType"></Fm-play-util>
 </div>
 </template>
 
 <script>
 import PlayUtil from 'views/play/playUtil'
+import FmPlayUtil from 'views/personalFM/personalFmChild/playUtil'
 export default {
     name: "foot",
     components: {
-        PlayUtil
+        PlayUtil,
+        FmPlayUtil
     },
     data() {
         return {

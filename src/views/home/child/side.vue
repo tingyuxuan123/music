@@ -3,11 +3,11 @@
     <el-menu :default-openeds="['1', '2']" router mode="vertical" background-color="#f5f5f7" text-color="#7d7d7d" active-text-color="#000">
         <template slot="title"><i class="el-icon-setting"></i>推荐</template>
         <el-menu-item index="/find">发现音乐</el-menu-item>
-        <el-menu-item index="/video">视频</el-menu-item>
+        <el-menu-item index="/video" :disabled="!$store.state.isLogin">视频</el-menu-item>
         <el-menu-item index="/personalfm" :disabled="!$store.state.isLogin">私人FM</el-menu-item>
         <template slot="title"><i class="el-icon-setting"></i>我的音乐</template>
-        <el-menu-item index="/recommend">每日推荐</el-menu-item>
-        <el-menu-item index="/myradio">我的电台</el-menu-item>
+        <el-menu-item index="/recommend" :disabled="!$store.state.isLogin">每日推荐</el-menu-item>
+        <el-menu-item index="/myradio" :disabled="!$store.state.isLogin">我的电台</el-menu-item>
         <el-menu-item index="/mycollect" :disabled="!$store.state.isLogin">我的收藏</el-menu-item>
 
         <el-submenu index="3" :disabled="!$store.state.isLogin">

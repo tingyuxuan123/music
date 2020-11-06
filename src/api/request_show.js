@@ -234,7 +234,7 @@ export function personalized( limit ) {
   //每日推荐歌曲  需要登录
   export function recommend_songs(){
     return instance({
-      url:"recommend/songs"
+      url:"/recommend/songs"
     })
   }
 
@@ -246,13 +246,7 @@ export function personalized( limit ) {
     })
   }
 
-  //说明 : 私人 FM( 需要登录 )
 
-  export function personal_fm(){
-    return instance({
-      url:"/personal_fm"
-    })
-  }
   
   //说明 : 调用此接口 , 传入音乐 id, 可喜欢该音乐
 
@@ -264,6 +258,9 @@ export function personalized( limit ) {
       }
     })
   }
+
+
+
 
  
   

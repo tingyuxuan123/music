@@ -53,7 +53,7 @@ export default {
             required: true
         },
         id: {
-            type: String,
+            type: [Number,String],
             required: true
         }
 
@@ -61,9 +61,9 @@ export default {
     computed: {},
     watch: {
         id(val, oldVal) {
-            console.log(val)
+          //  console.log(val)
             this.currentpage = 1
-            console.log(this.currentpage)
+       //     console.log(this.currentpage)
             this.getcomment(val, 0, this.limit)
 
         }
@@ -73,7 +73,7 @@ export default {
             switch (this.type) {
                 case "playlist": //歌单评论
                     this.$api.comment_playlist(id, offest * 40, limit).then((result) => {
-                        console.log(result)
+                     //   console.log(result)
                         this.currentpage = offest + 1
                         this.comments = result.comments
                         this.topComments = result.topComments
@@ -82,7 +82,7 @@ export default {
                     break;
                 case "video": //歌曲评论
                     this.$api.comment_video(id, offest * 40, limit).then((result) => {
-                        console.log(result)
+                      //  console.log(result)
                         this.currentpage = offest
                         this.comments = result.comments
                         this.topComments = result.topComments
@@ -91,7 +91,7 @@ export default {
                     break;
                 case "mv": //mv评论
                     this.$api.comment_mv(id, offest * 40, limit).then((result) => {
-                        console.log(result)
+                      //  console.log(result)
                         this.currentpage = offest
                         this.comments = result.comments
                         this.topComments = result.topComments
@@ -100,7 +100,7 @@ export default {
                     break;
                 case "album": //mv评论
                     this.$api.comment_album(id, offest * 40, limit).then((result) => {
-                        console.log(result)
+                      //  console.log(result)
                         this.currentpage = offest
                         this.comments = result.comments
                         this.topComments = result.topComments
@@ -110,7 +110,7 @@ export default {
                 case "song": //mv评论
                     if (id) {
                         this.$api.comment_music(id, offest * 40, limit).then((result) => {
-                            console.log(result)
+                        //    console.log(result)
                             this.currentpage = offest
                             this.comments = result.comments
                             this.topComments = result.topComments
@@ -138,7 +138,7 @@ export default {
         this.currentpage = 1
         this.getcomment(this.id, 0, this.limit)
 
-        console.log(this.id, this.current_page, this.type)
+       // console.log(this.id, this.current_page, this.type)
     },
 }
 </script>

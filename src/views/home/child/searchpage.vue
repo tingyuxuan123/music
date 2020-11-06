@@ -138,4 +138,7 @@ export default {
     font-size: 12px;
     margin: 15px 0px;
 }
+.searchpage{
+    padding: 20px;
+}
 </style>

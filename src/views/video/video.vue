@@ -139,6 +139,10 @@ export default {
 
 <style lang="less">
 //@import url(); 引入公共css类
+
+.video{
+    padding: 20px;
+}
 .el-select {
     width: 120px;
 }

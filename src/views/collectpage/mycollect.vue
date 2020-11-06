@@ -86,6 +86,9 @@ export default {
 
 <style lang="less" scoped>
 //@import url(); 引入公共css类
+.mycollect{
+    padding: 20px;
+}
 h4 {
     margin: 20px 0px;
     padding: 0px;

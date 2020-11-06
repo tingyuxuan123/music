@@ -34,7 +34,9 @@ import {
   video_category_list,
   group,
   videoall,
-  mvs
+  mvs,
+  recommend_songs,
+  recommend_resource
 
 
 } from "./request_show"
@@ -49,6 +51,8 @@ import {
   user_detail,
   playlist,
   likelist,
+  personal_fm,
+  dj_sublist
 } from './request_user'
 import cookie from '@/utils/cookie'
  
@@ -109,6 +113,8 @@ const api={
     group,
     videoall,
     mvs,
+    recommend_songs,
+    recommend_resource,
 
     album_sublist,
     mv_sublist,
@@ -118,7 +124,9 @@ const api={
     likelist,
     song_list_detail,
     song_detail,
-    lyric
+    lyric,
+    personal_fm,
+    dj_sublist
 
     
 }

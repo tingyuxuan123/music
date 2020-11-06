@@ -3,7 +3,7 @@
     <div class="el-icon-close" @click="show = false"></div>
     <h3>login</h3>
     <light-input class="input" v-model="loginfrom.phone" placeholder="手机号"></light-input>
-    <light-input class="input" v-model="loginfrom.password" placeholder="密码"></light-input>
+    <light-input class="input" v-model="loginfrom.password" placeholder="密码" type="password"></light-input>
 
     <el-button class="login-button" :logging="logging" type="primary" round @click="onLogin">登录</el-button>
 </div>

@@ -96,7 +96,9 @@ export default {
 .window .el-header {
     background-color: #409EFF;
 }
-
+.light-scroll{
+    padding: 0px;
+}
 .window .el-footer {
     border-top: 1px solid #e0e0e0;
 

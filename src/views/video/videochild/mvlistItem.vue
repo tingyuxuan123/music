@@ -1,4 +1,4 @@
-<template>
+30<template>
 <div class='mvlistitem'>
     <div class="mvlistitem-item" v-for="item in videolist" :key="item.id" @click="$router.push( `/mvinfo/mv/${item.id}`)">
         <div class="top">
